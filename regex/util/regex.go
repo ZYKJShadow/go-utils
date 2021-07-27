@@ -25,6 +25,18 @@ func FindAllString(s string, reg string) (res []string, err error) {
 	return
 }
 
+func MatchNumber(s string) (res []string, err error) {
+	compile, err := regexp.Compile("[0-9]+")
+	if err != nil {
+		return
+	}
+	if !compile.MatchString(s) {
+		return
+	}
+	res = compile.FindAllString(s, -1)
+	return
+}
+
 // MatchAllParams 匹配正则表达式中的参数值，args的参数个数必须与传入的正则表达式公式个数相等
 func MatchAllParams(s string, reg string, args ...interface{}) (res []interface{}, err error) {
 	compile, err := regexp.Compile(reg)
@@ -32,7 +44,6 @@ func MatchAllParams(s string, reg string, args ...interface{}) (res []interface{
 		return
 	}
 	if !compile.MatchString(s) {
-		err = errors.New("no characters were matched")
 		return
 	}
 	if match := compile.FindStringSubmatch(s); len(args) == len(match)-1 {
