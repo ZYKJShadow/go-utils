@@ -6,7 +6,6 @@ import (
 	"strconv"
 )
 
-// MustFindAllString if the expression cannot be parsed.
 func MustFindAllString(s string, reg string) (res []string) {
 	compile := regexp.MustCompile(reg)
 	if compile == nil {
@@ -25,6 +24,7 @@ func FindAllString(s string, reg string) (res []string, err error) {
 	return
 }
 
+// MatchNumber 提取字符串中的数字
 func MatchNumber(s string) (res []string, err error) {
 	compile, err := regexp.Compile("[0-9]+")
 	if err != nil {

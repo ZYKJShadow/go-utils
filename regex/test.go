@@ -6,12 +6,22 @@ import (
 	"log"
 )
 
+const s = "OnSettle origin.num:0 oriUID:85 sourceUID:108 isForce:false"
+
 func main() {
-	matchNumberTest()
+	findAllStringTest()
+}
+
+func findAllStringTest() {
+	reg := "\\w+UID:[0-9]+"
+	res, err := util.FindAllString(s, reg)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(res)
 }
 
 func matchAllParamsTest() {
-	s := "OnSettle origin.num:0 oriUID:85 sourceUID:108 isForce:false"
 	reg := "OnSettle origin.num:([0-9]+) oriUID:([0-9]+) sourceUID:([0-9]+) isForce:(.+)"
 	var num int
 	var oriUID int64
@@ -30,7 +40,6 @@ func matchAllParamsTest() {
 }
 
 func matchNumberTest() {
-	s := "OnSettle origin.num:0 oriUID:85 sourceUID:108 isForce:false"
 	res, err := util.MatchNumber(s)
 	if err != nil {
 		log.Fatal(err)
